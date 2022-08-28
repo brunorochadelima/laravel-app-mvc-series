@@ -23,3 +23,4 @@ Route::get('/series', [SeriesController::class, 'index']);
 //Parâmetros são nome classe e nome da função
 
 Route::get('/series/criar', [SeriesController::class, 'criarSerie']);
+Route::post('/series/salvar', [SeriesController::class, 'store']);

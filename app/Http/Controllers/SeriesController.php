@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Serie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SeriesController extends Controller
 {
     public function index(Request $request)
     {
 
-        $series = ['greys anatomy', 'the boys', 'hallo'];
+        $series = Serie::query()->orderBy('created_at', 'desc')->get();
+        // Usar para debugar o conteúdo ao inves de vardump dd($series);
 
 
         /*retorna a view, o paramentro dentro de [] é para criar
@@ -29,7 +32,18 @@ class SeriesController extends Controller
         return view('series.index')->with('series', $series);
     }
 
-    public function criarSerie(){
+    public function criarSerie()
+    {
         return view('series.create');
+    }
+
+    public function store(Request $request)
+    {
+        $nomeSerie = $request->input('nome');
+        $serie = new Serie();
+        $serie->nome = $nomeSerie;
+        $serie->save();
+
+        return redirect('/series');
     }
 }
