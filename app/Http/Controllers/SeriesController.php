@@ -21,17 +21,14 @@ class SeriesController extends Controller
 
         /*retorna a view, o paramentro dentro de [] é para criar
          a variável series com o conteúdo de $series na view
-
          return view('listarSeries', [
-             'series' => $series,
+         'series' => $series,
          ]);
-
+         
          função compact('series') faz a mesma função informada acima
          return view('listarSeries', compact('series'));
-
          ou com with conforme abaixo:
-
-       */
+         */
 
         return view('series.index')->with('series', $series)->with('mensagemSucesso', $mensagemSucesso);
     }
@@ -50,17 +47,16 @@ class SeriesController extends Controller
          $serie->save();*/
 
         //Criação em massa
-        Serie::create($request->all());
-        $request->session()->flash('mensagem.sucesso', 'Série adicionada com sucesso');
+        $serie = Serie::create($request->all());
+        // $request->session()->flash('mensagem.sucesso', "Série $serie->nome adicionada com sucesso");
 
-        return to_route('series.index');
+        return to_route('series.index')->with('mensagem.sucesso', "Série $serie->nome adicionada com sucesso");
     }
 
     public function destroy(Request $request)
     {
-        //   dd($request->serie);
+        $serie = Serie::find($request->series);
         Serie::destroy($request->serie);
-        $request->session()->flash('mensagem.sucesso', 'Série removida com sucesso');
-        return to_route('series.index');
+        return to_route('series.index')->with('mensagem.sucesso', 'Série removida com sucesso');
     }
 }
