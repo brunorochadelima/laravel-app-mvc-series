@@ -24,6 +24,8 @@ Route::controller(SeriesController::class)->group(function () {
     Route::get('/series/criar', 'criarSerie')->name('series.create');
     Route::post('/series/salvar', 'store')->name('series.store');
     Route::post('/series/destroy/{serie}', 'destroy')->name('series.destroy');
+    Route::get('/series/{series}/edit', 'edit')->name('series.edit');
+    Route::post('/series/{series}', 'update')->name('series.update');
     // 2 opção informar id como parãmetro
     // Router::post('/series/destroy?id=1', 'destroy')->name('series.destroy');
 });

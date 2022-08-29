@@ -24,7 +24,7 @@ class SeriesController extends Controller
          return view('listarSeries', [
          'series' => $series,
          ]);
-         
+
          função compact('series') faz a mesma função informada acima
          return view('listarSeries', compact('series'));
          ou com with conforme abaixo:
@@ -58,5 +58,15 @@ class SeriesController extends Controller
         $serie = Serie::find($request->series);
         Serie::destroy($request->serie);
         return to_route('series.index')->with('mensagem.sucesso', 'Série removida com sucesso');
+    }
+
+    public function edit(Serie $series) {
+        return view('series.edit')->with('serie', $series);
+    }
+
+    public function update(Serie $series, Request $request) {
+        $series->fill($request->all());
+        $series->save();
+        return to_route('series.index')->with('mensagem.sucesso', "Serie $series->nome atualizada com sucesso");
     }
 }
