@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SeriesContoller;
 use App\Http\Controllers\SeriesController;
 
 /*
@@ -19,8 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/series', [SeriesController::class, 'index']);
-//Parâmetros são nome classe e nome da função
-
-Route::get('/series/criar', [SeriesController::class, 'criarSerie']);
-Route::post('/series/salvar', [SeriesController::class, 'store']);
+Route::controller(SeriesController::class)->group(function () {
+    //Parâmetros são nome classe e nome da função
+    Route::get('/series', 'index')->name('series.index');
+    Route::get('/series/criar', 'criarSerie')->name('series.create');
+    Route::post('/series/salvar', 'store')->name('series.store');
+    Route::post('/series/destroy/{serie}', 'destroy')->name('series.destroy');
+    // 2 opção informar id como parãmetro
+    // Router::post('/series/destroy?id=1', 'destroy')->name('series.destroy');
+});

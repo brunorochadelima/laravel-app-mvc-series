@@ -39,11 +39,21 @@ class SeriesController extends Controller
 
     public function store(Request $request)
     {
-        $nomeSerie = $request->input('nome');
-        $serie = new Serie();
-        $serie->nome = $nomeSerie;
-        $serie->save();
+        /* Criação individual
+         $nomeSerie = $request->input('nome');
+         $serie = new Serie();
+         $serie->nome = $nomeSerie;
+         $serie->save();*/
 
-        return redirect('/series');
+        //Criação em massa
+        Serie::create($request->all());
+
+        return to_route('series.index');
+    }
+
+    public function destroy(Request $request) {
+    //   dd($request->serie);
+      Serie::destroy($request->serie);
+      return to_route('series.index');
     }
 }

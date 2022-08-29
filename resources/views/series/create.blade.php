@@ -1,6 +1,6 @@
 <x-layout title="Nova Série">
 
-  <form action="/series/salvar" method="post">
+  <form action="{{route('series.store')}}" method="post">
     <!-- Corrige Cross-site request forgery -->
     @csrf
     <div>
