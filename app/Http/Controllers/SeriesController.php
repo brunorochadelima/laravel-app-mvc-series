@@ -12,6 +12,10 @@ class SeriesController extends Controller
     {
 
         $series = Serie::query()->orderBy('created_at', 'desc')->get();
+        $mensagemSucesso = $request->session()->get('mensagem.sucesso');
+        // encerrar a seçção caso usar putno lugar de flash
+        //$request->session()->forget('mensagem.sucesso');
+
         // Usar para debugar o conteúdo ao inves de vardump dd($series);
 
 
@@ -29,7 +33,7 @@ class SeriesController extends Controller
 
        */
 
-        return view('series.index')->with('series', $series);
+        return view('series.index')->with('series', $series)->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function criarSerie()
@@ -47,13 +51,16 @@ class SeriesController extends Controller
 
         //Criação em massa
         Serie::create($request->all());
+        $request->session()->flash('mensagem.sucesso', 'Série adicionada com sucesso');
 
         return to_route('series.index');
     }
 
-    public function destroy(Request $request) {
-    //   dd($request->serie);
-      Serie::destroy($request->serie);
-      return to_route('series.index');
+    public function destroy(Request $request)
+    {
+        //   dd($request->serie);
+        Serie::destroy($request->serie);
+        $request->session()->flash('mensagem.sucesso', 'Série removida com sucesso');
+        return to_route('series.index');
     }
 }
