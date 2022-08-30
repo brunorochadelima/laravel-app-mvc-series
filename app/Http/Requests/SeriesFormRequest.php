@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use GuzzleHttp\Psr7\Message;
 
 class SeriesFormRequest extends FormRequest
 {
