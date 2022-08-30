@@ -12,7 +12,7 @@ class SeriesController extends Controller
     public function index(Request $request)
     {
 
-        $series = Serie::query()->orderBy('created_at', 'desc')->get();
+        $series = Serie::all();
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');
         // encerrar a seçção caso usar putno lugar de flash
         //$request->session()->forget('mensagem.sucesso');

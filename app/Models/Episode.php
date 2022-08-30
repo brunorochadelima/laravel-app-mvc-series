@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Episode extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     //Episodio pertencia a uma temporada
     public function season(){
