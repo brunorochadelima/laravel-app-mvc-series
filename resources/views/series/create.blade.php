@@ -1,27 +1,37 @@
 <x-layout title="Nova Série">
     <form action="{{ route('series.store') }}" method="post">
-        <!-- Corrige Cross-site request forgery -->
         @csrf
+
         <div class="row mb-3">
             <div class="col-8">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" autofocus name="nome" class="form-control"  value="{{ old('nome') }}"
-                   ></input>
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text"
+                       autofocus
+                       id="nome"
+                       name="nome"
+                       class="form-control"
+                       value="{{ old('nome') }}">
             </div>
 
             <div class="col-2">
-                <label for="seasonsQtd" class="form-label">Nº Temporadas</label>
-                <input type="text" name="seasonsQtd" class="form-control" value="{{ old('seasonsQtd') }}"
-                    ></input>
+                <label for="seasonsQty" class="form-label">Nº Temporadas:</label>
+                <input type="text"
+                       id="seasonsQty"
+                       name="seasonsQty"
+                       class="form-control"
+                       value="{{ old('seasonsQty') }}">
             </div>
 
             <div class="col-2">
-                <label for="episodesPerSeason" class="form-label">Eps. por Temporada</label>
-                <input type="text" name="episodesPerSeason" class="form-control"  value="{{ old('episodesPerSeason') }}"
-                   ></input>
+                <label for="episodesPerSeason" class="form-label">Eps / Temporada:</label>
+                <input type="text"
+                       id="episodesPerSeason"
+                       name="episodesPerSeason"
+                       class="form-control"
+                       value="{{ old('episodesPerSeason') }}">
             </div>
         </div>
 
-        <button type="submit" class="btn btn-dark mt-3">Adicionar</button>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
     </form>
 </x-layout>

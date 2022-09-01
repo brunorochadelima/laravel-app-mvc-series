@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use GuzzleHttp\Psr7\Message;
 
 class SeriesFormRequest extends FormRequest
 {
@@ -20,12 +19,12 @@ class SeriesFormRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules()
     {
         return [
-           'nome' => ['required', 'min:3'],
+            'nome' => ['required', 'min:2'],
         ];
     }
 }

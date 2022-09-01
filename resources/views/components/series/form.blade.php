@@ -1,19 +1,17 @@
-<x-layout title="">
-
-
-  <form action="{{$action}}" method="post">
-    <!-- Corrige Cross-site request forgery -->
+<form action="{{ $action }}" method="post">
     @csrf
 
     @if($update)
     @method('PUT')
     @endif
-
-    <div>
-      <label for="nome" class="form-label">Nome</label>
-      <input type="text" name="nome" class="form-control" @isset($nome) value="{{$nome}}" @endisset></input>
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text"
+               id="nome"
+               name="nome"
+               class="form-control"
+               @isset($nome)value="{{ $nome }}"@endisset>
     </div>
-    <button type="submit" class="btn btn-dark mt-3">Adicionar</button>
-  </form>
 
-</x-layout>
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+</form>

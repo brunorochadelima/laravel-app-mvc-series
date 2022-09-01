@@ -2,37 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeriesFormRequest;
+use App\Models\Episode;
+use App\Models\Season;
 use App\Models\Series;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\SeriesFormRequest;
-use App\Models\Season;
-use App\Models\Episode;
 
 class SeriesController extends Controller
 {
     public function index(Request $request)
     {
-
         $series = Series::all();
-        $mensagemSucesso = $request->session()->get('mensagem.sucesso');
-        // encerrar a seçção caso usar putno lugar de flash
-        //$request->session()->forget('mensagem.sucesso');
+        $mensagemSucesso = session('mensagem.sucesso');
 
-        // Usar para debugar o conteúdo ao inves de vardump dd($series);
-
-
-        /*retorna a view, o paramentro dentro de [] é para criar
-         a variável series com o conteúdo de $series na view
-         return view('listarSeries', [
-         'series' => $series,
-         ]);
-         função compact('series') faz a mesma função informada acima
-         return view('listarSeries', compact('series'));
-         ou com with conforme abaixo:
-         */
-
-        return view('series.index')->with('series', $series)->with('mensagemSucesso', $mensagemSucesso);
+        return view('series.index')->with('series', $series)
+            ->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function create()
@@ -84,6 +69,8 @@ class SeriesController extends Controller
     {
         $series->fill($request->all());
         $series->save();
-        return to_route('series.index')->with('mensagem.sucesso', "Serie $series->nome atualizada com sucesso");
+
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$series->nome}' atualizada com sucesso");
     }
 }
